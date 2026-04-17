@@ -1,0 +1,13 @@
+class Solution:
+    def lastStoneWeight(self, stones: List[int]) -> int:
+        stones = [-s for s in stones]
+        heapq.heapify(stones)
+
+        while len(stones) > 1:
+            y = abs(heapq.heappop(stones))
+            x = abs(heapq.heappop(stones))
+
+            if y > x:
+                heapq.heappush(stones, -(y-x))
+        
+        return abs(stones[0]) if stones else 0
